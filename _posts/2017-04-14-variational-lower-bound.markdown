@@ -33,7 +33,7 @@ Note that we are general – the hidden variables might include the
 “parameters”. The relationship of these two variables can be represented
 using the following graphical model.
 
-<img src="/assets/inference.png" align="center">
+<div style="text-align:center;"><img src="/assets/inference.png" align="center"></div>
 
 
 Moreover, uppercase \\(P(X) \\) denotes the probability distribution over
@@ -130,7 +130,7 @@ distribution.
 
 Now, we can use our understanding of the variational lower bound to
 deduce the learning rules in practical problems. We use the paper
-[@ba2014multiple] as an example.
+[[2]](#ba2014multiple) as an example.
 
 First of all, we want to maximize the log likelihood of the class label:
 \\(\log p(y|I, W)\\). Here \\(I\\) is the image, \\(W\\) is the model parameters and
@@ -169,20 +169,20 @@ papers or posts: [[1]](#Eric), [[6]](#Blei2011), [[7]](#fox2012tutorial),
 [[8]](#tzikas2008variational), [[9]](#Zoubin2003).
 
 ## Reference
-E. Jang. A Beginner’s Guide to Variational Methods: Mean-Field Approximation.http://blog.evjang.com/2016/08/variational-bayes.html, 2016. <a name="Eric"></a>
+[1] E. Jang. A Beginner’s Guide to Variational Methods: Mean-Field Approximation.http://blog.evjang.com/2016/08/variational-bayes.html, 2016. <a name="Eric"></a>
 
-J. Ba, V. Mnih, and K. Kavukcuoglu. Multiple object recognition with visual attention.arXiv preprint arXiv:1412.7755, 2014. <a name="ba2014multiple"></a>
+[2] J. Ba, V. Mnih, and K. Kavukcuoglu. Multiple object recognition with visual attention.arXiv preprint arXiv:1412.7755, 2014. <a name="ba2014multiple"></a>
 
-T. Lei, R. Barzilay, and T. Jaakkola. Rationalizing neural predictions. EMNLP, 2016. <a name="lei2016rationalizing"></a>
+[3] T. Lei, R. Barzilay, and T. Jaakkola. Rationalizing neural predictions. EMNLP, 2016. <a name="lei2016rationalizing"></a>
 
-K. Xu, J. Ba, R. Kiros, K. Cho, A. C. Courville, R. Salakhutdinov, R. S. Zemel, andY. Bengio. Show, attend and tell: Neural image caption generation with visual attention.In ICML, volume 14, pages 77–81, 2015. <a name="xu2015show"></a>
+[4] K. Xu, J. Ba, R. Kiros, K. Cho, A. C. Courville, R. Salakhutdinov, R. S. Zemel, andY. Bengio. Show, attend and tell: Neural image caption generation with visual attention.In ICML, volume 14, pages 77–81, 2015. <a name="xu2015show"></a>
 
-V. Mnih, N. Heess, A. Graves, et al. Recurrent models of visual attention. In Advancesin neural information processing systems, pages 2204–2212, 2014. <a name="mnih2014recurrent"></a>
+[5] V. Mnih, N. Heess, A. Graves, et al. Recurrent models of visual attention. In Advancesin neural information processing systems, pages 2204–2212, 2014. <a name="mnih2014recurrent"></a>
 
-D. M. Blei. Variational inference. Lecture from Princeton, variational inference, 2011. <a name="Blei2011"></a>
+[6] D. M. Blei. Variational inference. Lecture from Princeton, variational inference, 2011. <a name="Blei2011"></a>
 
-C. W. Fox and S. J. Roberts. A tutorial on variational bayesian inference. Artificialintelligence review, pages 1–11, 2012. <a name="fox2012tutorial"></a>
+[7] C. W. Fox and S. J. Roberts. A tutorial on variational bayesian inference. Artificialintelligence review, pages 1–11, 2012. <a name="fox2012tutorial"></a>
 
-D. G. Tzikas, A. C. Likas, and N. P. Galatsanos. The variational approximation forbayesian inference. IEEE Signal Processing Magazine, 25(6):131–146, 2008. <a name="tzikas2008variational"></a>
+[8] D. G. Tzikas, A. C. Likas, and N. P. Galatsanos. The variational approximation forbayesian inference. IEEE Signal Processing Magazine, 25(6):131–146, 2008. <a name="tzikas2008variational"></a>
 
-Z. Ghahramani. Variational methods. Lecture from CMU, Statistical Approaches to Learningand Discovery, 2003. <a name="Zoubin2003"></a>
+[9] Z. Ghahramani. Variational methods. Lecture from CMU, Statistical Approaches to Learningand Discovery, 2003. <a name="Zoubin2003"></a>
