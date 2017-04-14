@@ -36,6 +36,8 @@ Note that we are general – the hidden variables might include the
 “parameters”. The relationship of these two variables can be represented
 using the following graphical model (Figure \[fig:inference\]).
 
+<img src="/assets/inference.png">
+
 \[h!\] ![A graphical model
 representation.[]{data-label="fig:inference"}](/assets/inference.png){width=".4\linewidth"}
 
