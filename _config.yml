@@ -1,3 +1,14 @@
+# Site settings
 name: Xitong Yang
 title: Xitong Yang's Blog
+github_username: xyang35
+
+# Build settings
 markdown: kramdown
+permalink: pretty
+
+highlighter: rouge
+kramdown:
+  input: GFM
+  auto_ids: true
+  syntax_highlighter: rouge
