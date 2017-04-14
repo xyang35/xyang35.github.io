@@ -5,7 +5,7 @@ excerpt: "In this note, we aim to introduce the basic ideas of
 variational lower bound, which can help to understand the derivations of
 the learning rules in the papers related to “hard attention” mechanism."
 date: 2017-04-14
-bibliography: '../assets/variational_refs.bib'
+bibliography: '/assets/variational_refs.bib'
 ---
 
 Introduction
@@ -37,7 +37,7 @@ Note that we are general – the hidden variables might include the
 using the following graphical model (Figure \[fig:inference\]).
 
 \[h!\] ![A graphical model
-representation.[]{data-label="fig:inference"}](../assets/inference.png "fig:"){width=".4\linewidth"}
+representation.[]{data-label="fig:inference"}](/assets/inference.png){width=".4\linewidth"}
 
 Moreover, uppercase $P(X)$ denotes the probability distribution over
 that variable, and lowercase $p(X)$ is the density function of the
