@@ -38,7 +38,7 @@ using the following graphical model.
 <img src="/assets/inference.png">
 
 
-Moreover, uppercase $ P(X) $ denotes the probability distribution over
+Moreover, uppercase \\(P(X) \\) denotes the probability distribution over
 that variable, and lowercase $p(X)$ is the density function of the
 distribution of $X$. The posterior distribution of the hidden variables
 can then be written as follows using the *Bayes’ Theorem*.
