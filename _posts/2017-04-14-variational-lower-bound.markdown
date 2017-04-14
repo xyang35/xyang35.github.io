@@ -28,7 +28,9 @@ the learning rules in the papers related to “hard attention” mechanism
 ### Problem setup
 
 
-Assume that $X$ are observations (data) and $Z$ are hidden variables.
+Assume that 
+$X$ 
+are observations (data) and $Z$ are hidden variables.
 Note that we are general – the hidden variables might include the
 “parameters”. The relationship of these two variables can be represented
 using the following graphical model.
