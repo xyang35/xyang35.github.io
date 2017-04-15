@@ -147,7 +147,7 @@ $$\log \sum_l p(l|I,W)p(y|l,I,W) \geq \sum_l p(l|I,W) \log p(y|l,I,W)$$
 We can also get the same result using the variational lower bound of the
 marginal probability of observations and setting \\(q(l) = p(l|I,W)\\):
 
-$$\log p(y|I,W) \geq \sum_l q(l) \log\frac{p(y,l|I,W)}{q(l)} = \log \sum_l p(l|I,W)p(y|l,I,W)$$
+$$\log p(y|I,W) \geq \sum_l q(l) \log\frac{p(y,l|I,W)}{q(l)} = \sum_l p(l|I,W) \log p(y|l,I,W)$$
 
 Then, we can maximize the variational lower bound instead by taking
 derivatives of it with respect to the model parameter \\(W\\). Almost the
