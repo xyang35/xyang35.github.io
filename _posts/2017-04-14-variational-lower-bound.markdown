@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Understanding the Variational Lower Bound"
 excerpt: "In this note, we aim to introduce the basic ideas of variational lower bound, which can help to understand the derivations of the learning rules in the papers related to “hard attention” mechanism."
 date: 2017-04-14
