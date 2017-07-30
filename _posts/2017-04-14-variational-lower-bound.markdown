@@ -113,7 +113,7 @@ where \\(L\\) is the **variational lower bound** defined above. Equation
 (10) is obtained by the normalization constraint: \\(\int_Z q(Z) = 1\\).
 Rearrange the equations we can get:
 
-$$ L = \log p(X) + KL\left[q(Z) \| p(Z|X)\right] $$
+$$ L = \log p(X) - KL\left[q(Z) \| p(Z|X)\right] $$
 
 As KL divergence is always \\(\geq 0\\), once again we get
 \\(L \leq \log p(X)\\) is a lower bound of the log probability of
