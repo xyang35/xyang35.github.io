@@ -52,7 +52,7 @@ mathjax: true
 
 对于关注特征学习的我来说，这篇来自于Facebook和伯克利的论文是十分有趣，想法简洁而又让人信服。而且Deepak小哥在poster前的讲解也是尽心尽力，我想我以后会更多关注他们组的一些工作了。首先这篇文章有一个关键而且颇为合理的假设：我们可以通过运动来发现这个物体（或者说分辨出物体与背景的区别）。举个例子：下图中有一只猫（左上），如果它静止不动的话，一个没见过猫的人可能会根据颜色等因素将这个物体分割成不同的部分（如右上）。但若这只猫动了（如左下），我们就可以通过整个物体的运动发现这些部分应该是属于“猫”这一个统一的物体的（如右下）。
  
-<div style="text-align:center;"><img src="/assets/papers/Learning_by_Moving.png" align="center" height="300px"></div>
+<div style="text-align:center;"><img src="/assets/papers/Learning_by_Moving.png" align="center" height="280px"></div>
     
 发现猫这个物体之后，我们人类就会修改自己对“猫”的认识。当下次我们再见到这样的猫的时候，我们自然就会直接识别出猫这个整体了。同时这也说明了我们对这类图像有了更好的理解，即更好的“特征表示”。受到这个思路的启发，这篇论文就是希望：***先通过捕捉运动的方式自动地得到图像中的物体，然后训练模型让它能够直接从图像输入中分割出物体来，从而学习到对这个图像更好的特征表示***。为了得到物体的运动，论文对视频数据提取光流，然后将与背景运动不同的部分视为物体。分割出物体后的掩码图（mask）会作为训练的监督信号，让模型能够做到给定单一图像作为输入，输出图中物体的掩码图（类似图像分割）。通过这样不断的自动寻找物体并训练模型，我们就可以得到一个更好的图像特征表示了。
 
@@ -62,7 +62,7 @@ mathjax: true
     
 这篇文章是对视频进行自监督的表示学习，思路也颇有意思。论文首先设计了一个可以自监督完成的辅助任务：从几个视频片段中识别“奇怪”的片段。由于时序顺序对于视频来说是一个十分重要的特性，我们很自然地就会想到可以把“奇怪”片段定义为**乱序**的片段。因此，这个辅助任务就是一个*让模型从几个片段中找到乱序片段的分类问题*。通过学习解决这个辅助任务，模型可以学到视频中时序信息的模式，从而实现自监督的表示学习。
 
-<div style="text-align:center;"><img src="/assets/papers/odd_one_out.png" align="center" height="300px"></div>
+<div style="text-align:center;"><img src="/assets/papers/odd_one_out.png" align="center" height="280px"></div>
     
 不得不提的是，之前已经有类似的[工作](https://arxiv.org/pdf/1603.08561.pdf)，让模型鉴别视频片段是否乱序从而实现自监督的表示学习（order verification）。当我问及作者两者的比较之时，作者的回答是本文可以看作是之前工作的扩展版，即从二分类问题扩展为多分类问题。而且他们在实验中发现，一定程度的候选片段的增加（其中有一个乱序）会使模型效果变好。另外很关键的一点，文中使用的帧差堆叠（stack of difference of frames）的视频片段描述方式对模型性能的提升有巨大的帮助（将近10个点的提升）！
 
@@ -72,7 +72,7 @@ mathjax: true
     
 这篇文章来自UC Berkeley和Google，作者Tinghui在讲解时的淡定和自信给我留下了很深的印象。文章希望从视频中无监督地学出深度和自运动信息，其思路是将视角合成（view synthesis）的结果作为模型的监督信号。大概做法是用两个网络分别生成深度信息和自运动信息，然后用视角合成模型对原图进行映射，然后将映射的结果与实际结果对比训练网络。
 
-<div style="text-align:center;"><img src="/assets/papers/depth_egomotion.png" align="center" height="300px"></div>
+<div style="text-align:center;"><img src="/assets/papers/depth_egomotion.png" align="center" height="280px"></div>
     
 我觉得这个思路其实跟下文的 [*Neural Face Editing*](#face) 有点类似，都是***利用理论模型，将其中变量解耦合和重组，从而获得监督信号***。对比一下就可以看到，这篇文章中用的是视角合成模型，[*Neural Face Editing*](#face) 用的是人脸合成模型。视角合成模型中解耦合的变量是深度和运动参数，人脸合成模型解耦合的变量则是平面角度，反射度，光照度等。这种类似的思路其实跟我们最近在做的工作也非常相似，让我很受启发。
 
@@ -98,7 +98,7 @@ mathjax: true
 
 同样是动作定位，这篇文章的做法就有点“另辟蹊径”的感觉了。首先，它把各个动作类别再细分为三类：动作开始，中间和结束。这样模型的输出便成为 \\(C \times 3\\) 个类别，其中 \\(C\\) 是动作类别的个数。然后再用动态规划的方法，求解一个结构和最大化的问题。具体怎么构建和求解这个问题可以参见论文中的介绍。
 
-<div style="text-align:center;"><img src="/assets/papers/structured_max_sum.png" align="center" height="300px"></div>
+<div style="text-align:center;"><img src="/assets/papers/structured_max_sum.png" align="center" height="280px"></div>
 
 
 ### 其它
@@ -111,7 +111,7 @@ mathjax: true
 
 <div style="text-align:center;"><img src="/assets/papers/loss_correction.png" align="center" height="200px"></div>
 
-算法的重点在于，如何从含有噪声的数据集中有效地估计出转移矩阵 \\(T\\)。文中的定理三说明了只要有足够的数据量和足够好的分类器 \\(h\\)，我们就**只需要从含噪数据中**进行估计便可得到准确的 \\(T\\)。这个结论略微有点反常理，让人印象深刻。那么怎么估计矩阵 \\(T\\)呢，上图给出了算法的流程。首先，我们用已有的数据（含标签噪声）训练分类模型 \\(h\\)。然后，我们任意取出一部分数据集合 \\(X'\\)。对于每个标签类别 \\(i\\)，我们选取 \\(X'\\) 中对该标签预测概率最高的那个数据 \\(x^i\\)，即 \\(x^i = argmax_{x\in X'} p(\tilde{y} = e^i \| x)\\)。那么 \\(T_{ij}\\) 的值可以由*该分类模型对于这个数据\\(x^i\\)误分为其他类别\\(j\\)的概率值* 得到，即 \\(T_{ij}= p(\tilde{y} = e^j \| x^i)\\) 。得到估计的 \\(T\\) 后，我们就可以按前文所说的前向或后向纠正的方法重新训练模型 \\(h\\) 了。
+算法的重点在于，如何从含有噪声的数据集中有效地估计出转移矩阵 \\(T\\)。文中的定理三说明了只要有足够的数据量和足够好的分类器 \\(h\\)，我们就**只需要从含噪数据中**进行估计便可得到准确的 \\(T\\)。这个结论略微有点反常理，让人印象深刻。那么怎么估计矩阵 \\(T\\)呢，上图给出了算法的流程。首先，我们用已有的数据（含标签噪声）训练分类模型 \\(h\\)。然后，我们任意取出一部分数据集合 \\(X'\\)。对于每个标签类别 \\(i\\)，我们选取 \\(X'\\) 中对该标签预测概率最高的那个数据 \\(x^i\\)，即 \\(x^i = argmax_{x\in X'} p(\tilde{y} = e^i \| x)\\)。那么 \\(T_{ij}\\) 的值可以由*该分类模型对于这个数据 \\(x^i\\) 误分为其他类别 \\(e^j\\) 的概率值* 得到，即 \\(T_{ij}= p(\tilde{y} = e^j \| x^i)\\) 。得到估计的 \\(T\\) 后，我们就可以按前文所说的前向或后向纠正的方法重新训练模型 \\(h\\) 了。
 
 
 #### 2. Additive Component Analysis ([link](http://openaccess.thecvf.com/content_cvpr_2017/html/Murdock_Additive_Component_Analysis_CVPR_2017_paper.html))
@@ -120,7 +120,7 @@ mathjax: true
 
 这篇文章来自CMU的Fernando组，内容是一个新的非线性降维方法，可以看作是主成分分析（PCA）的扩展。这个工作的思路很好理解。传统的PCA将高维数据映射到低维的子空间中，让高维数据可以由低维数据的线性组合近似。然而PCA的方法受限与其线性组合的限制，对高维数据的表达能力不足，因此人们想设计一种基于非线性组合的降维方法。从下图可以清楚的看到，与PCA相比，ACA的子空间的组合并不需要是线性的，这样可以增加低维空间的灵活程度和表达能力。
 
-<div style="text-align:center;"><img src="/assets/papers/Additive_Component_Analysis.png" align="center" height="300px"></div>
+<div style="text-align:center;"><img src="/assets/papers/Additive_Component_Analysis.png" align="center" height="280px"></div>
 
 具体的实现涉及到如何共同学习基函数和各个成分，感兴趣的可以去看看论文（我是没细看了）。这里想再多讨论一下这个方法的特点。根据本人在poster session上听到的，ACA的优点有以下三点：1、非线性；2、可以从低维数据反向映射回高维数据；3、高效（不需要像PCA那样计算每个数据对的相似性）。然而一个很自然的问题是（当场也有人问了）：这个方法跟自编码器（autoencoder）相比有什么优势呢？为什么我们不直接用简单的自编码器呢？很显然，ACA所提到的三个优点，自编码器都是具备的。当时听到作者是这么回答的：自编码器这类基于神经网络的方法始终是比较“黑盒子”的，其中的编码过程和正则化选择都不足够透明，需要很多工程性的投入以及会有过拟合和缺乏解释性的问题。而ACA则是类似PCA那样有比较清楚的数学解释。这个回答我还是可以接受的，你觉得呢？
 
