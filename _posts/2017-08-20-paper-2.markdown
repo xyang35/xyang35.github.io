@@ -35,6 +35,11 @@ $$t(x)=\exp{-\beta d(x)}$$
 ![](/assets/papers/optical_model_geo.png)
 *来源：Single Image Haze Removal Using Dark Channel Prior*
 
+<p>
+    <img src="/assets/papers/optical_model_geo.png" align="center" height="280px" alt>
+    <em>来源：Single Image Haze Removal Using Dark Channel Prior</em>
+</p>
+
 ## 二、文献一览
 ----------
 
