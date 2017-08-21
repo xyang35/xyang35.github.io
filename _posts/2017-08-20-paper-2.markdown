@@ -16,7 +16,11 @@ mathjax: true
 
 大气散射模型首先基于这样的一个现象：光线经过一个散射媒介之后，*其原方向的光线强度会受到衰减*，并且其能量会发散到其他方向。因此，在一个有雾的环境中，相机（或者人眼）接收到的某个物体（或场景）的光其实来源于两个部分：1、来自于该物体（或场景）本身，这个部分的光强受到散射媒介的影响会有衰弱；2、来自大气中其他光源散射至相机（或人眼）的光强。见下图：
 
-<div style="text-align:center;"><img src="/assets/papers/optical_model.png" align="center" height="280px"></div>
+
+<p align="center" >
+    <img src="/assets/papers/optical_model.png" align="center" height="280px" alt>
+    <em>来源：DehazeNet: An End-to-End System for Single Image Haze Removal</em>
+</p>
 
 由于能量是守恒的，*散射掉的部分光强度应该跟其他光源散射过来的光强是一样的*。因此，我们可以将一张有雾的图像表示为以下的一个线性模型：
 
@@ -26,19 +30,22 @@ $$I(x) = J(x)t(x) + A(1-t(x)) $$
 
 再进一步，如果我们假设大气是均质（homogenous）的话，透射率则与物体（或场景）到相机的距离成反指数关系：
 
-$$t(x)=\exp{-\beta d(x)}$$
+$$t(x)=\exp^{-\beta d(x)}$$
 
 其中\\( d(x) \\)是深度图（depth map），\\( \beta \\)是大气的散射系数。
 
-从几何上看，上文的大气散射模型说明了在 RGB 颜色空间当中，向量\\( A \\)、\\( I(x) \\)和\\( J(x) \\)是共面的，而且它们的终点应该是共线的，如下图：
-
-![](/assets/papers/optical_model_geo.png)
-*来源：Single Image Haze Removal Using Dark Channel Prior*
+从几何上看，上文的大气散射模型说明了在 RGB 颜色空间当中，向量\\( A \\)、\\( I(x) \\)和\\( J(x) \\)是共面的，而且它们的终点应该是共线的，透射率\\( t(x) \\)是\\( \|A-I(x)\| \\)和\\( \|A-J(x)\| \\)的比值。如下图：
 
 <p align="center" >
     <img src="/assets/papers/optical_model_geo.png" align="center" height="280px" alt>
     <em>来源：Single Image Haze Removal Using Dark Channel Prior</em>
 </p>
+
+另外从公式中我们可以看到，当距离趋近于无穷大，即\\( d(x) -> inf \\)时，我们有\\( A=I(x) \\)。虽然实际中距离不可能是无穷大的，但是我们可以利用这一性质来估计大气的全局光照，即找到透射率最小（雾气最浓）的位置的最大光照强度：\\( A = \max_{y\in \{x|t(x)\leq t_0\}}I(y) \\)。
+
+有了\\( I(x) \\)、\\( t(x) \\)和\\( A \\)，我们就可以利用大气散射模型公式还原出\\( J(x) \\)：
+
+$$J(x)= \frac{I(x)-A}{t(x)} + A $$
 
 ## 二、文献一览
 ----------
