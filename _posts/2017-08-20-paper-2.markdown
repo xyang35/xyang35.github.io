@@ -7,7 +7,7 @@ date: 2017-08-20
 mathjax: true
 ---
 
-论文摘趣第二期（说好的周更呢？！），我们来对图像去雾算法做一个简短的综述。图像去雾是一个公认的比较困难的问题，甚至在很多情况下是一个欠适定（underdetermined）的问题（从下文的成像模型可以看出）。因此有不少工作是利用多张图片或者额外信息来实现去雾效果的。然而本文的内容只针对于单张图像的去雾算法（single image dehazing），即给定一张含有雾气的图像，我们希望还原其无雾的图像。
+论文摘趣第二期（说好的周更呢？！），我们来对图像去雾算法做一个简短的综述。图像去雾是一个公认的比较困难的问题，甚至在很多情况下是一个欠适定（underdetermined）的问题（从下文的成像模型可以看出）。因此有不少工作是利用多张图片或者额外信息来实现去雾效果的。然而本文关注的焦点在于单张图像的去雾算法（single image dehazing），即给定一张含有雾气的图像，我们希望还原其无雾的图像。
 
 ## 一、有雾图像的成像模型
 ----------
@@ -47,33 +47,47 @@ $$t(x)=\exp^{-\beta d(x)}$$
 
 $$J(x)= \frac{I(x)-A}{t(x)} + A $$
 
+然而，如果只提供单张图像的信息的话，同时求解\\( J(x) \\)、\\( t(x) \\)和\\( A \\)是一个欠适定的问题。因为对于每个像素点，我们可以得到三个方程式（分别对应三个颜色通道），但我们一共要求解四个未知数（即便假设\\( A \\)可以估计得到）。因此，人们往往需要利用各种先验知识（如暗通道先验）*来先估计透射图\\( t(x) \\)*，并以此求出其他未知量。
+
 ## 二、文献一览
 ----------
 
 ### 2008年
 
+2008年巧合般地出现了两篇关于单张图像去雾算法的经典论文，它们都具有开创性的意味，引用率很高。颇为有趣的是，这两篇文章都是单一作者署名的。
+
 #### 1. Visibility in Bad Weather from a Single Image (CVPR08，[link](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.329.7924&rep=rep1&type=pdf))
 
-> 通过捕捉运动的方式自动得到图像中的物体，并以此进行图像特征的无监督学习
+> 最大化局部对比度
 
-对于关注特征学习的我来说，这篇来自于Facebook和伯克利的论文是十分有趣，想法简洁而又让人信服。而且Deepak小哥在poster前的讲解也是尽心尽力，我想我以后会更多关注他们组的一些工作了。首先这篇文章有一个关键而且颇为合理的假设：我们可以通过运动来发现这个物体（或者说分辨出物体与背景的区别）。举个例子：下图中有一只猫（左上），如果它静止不动的话，一个没见过猫的人可能会根据颜色等因素将这个物体分割成不同的部分（如右上）。但若这只猫动了（如左下），我们就可以通过整个物体的运动发现这些部分应该是属于“猫”这一个统一的物体的（如右下）。
- 
-<div style="text-align:center;"><img src="/assets/papers/Learning_by_Moving.png" align="center" height="280px"></div>
-    
-发现猫这个物体之后，我们人类就会修改自己对“猫”的认识。当下次我们再见到这样的猫的时候，我们自然就会直接识别出猫这个整体了。同时这也说明了我们对这类图像有了更好的理解，即更好的“特征表示”。受到这个思路的启发，这篇论文就是希望：***先通过捕捉运动的方式自动地得到图像中的物体，然后训练模型让它能够直接从图像输入中分割出物体来，从而学习到对这个图像更好的特征表示***。为了得到物体的运动，论文对视频数据提取光流，然后将与背景运动不同的部分视为物体。分割出物体后的掩码图（mask）会作为训练的监督信号，让模型能够做到给定单一图像作为输入，输出图中物体的掩码图（类似图像分割）。通过这样不断的自动寻找物体并训练模型，我们就可以得到一个更好的图像特征表示了。
+另外，虽然该算法利用 *对比度先验* 较为成功地实现了单张图像的去雾，但是它只是一种单纯从 *图像增强* 角度出发的方法，并没有从物理模型的角度上还原物体（或场景）的辐射，即人们常说的 not physically-grounded。
 
 #### 2. Single Image Dehazing (TOG08，[link](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.456.2558&rep=rep1&type=pdf))
 
-> 通过解决“寻找多个片段中的乱序片段”这个辅助任务，进行视频的自监督学习
+> 假设shading和透射率统计独立，运用独立成分分析估计透射图
     
-单作者
+与前文不同，这篇文章提出了一个基于物理模型的图像去雾方法。首先，文中对场景辐射\\(J(x)\\)作了一定的简化——局部反照率恒定（locally constant albedo）。我们把未知图像\\(J(x)\\)分解为两项相乘的形式 \\( R(x)l(x) \\)，其中\\(R\\)是一个三通道的RGB向量，代表场景表面的反射系数；\\(l(x)\\)是一个标量，表示该位置的反射光强。*局部分照率恒定* 则是假设一个局部区域内各个像素点的反射系数是一致的：\\( R(x) = R, x\in \Omega \\)。因此，同一个局部内的所有\\(J(x)\\)都具有相同的方向\\(R\\)。如下图：
 
+<p align="center" >
+    <img src="/assets/papers/fattal.png" align="center" height="280px" alt>
+    <em>来源：Single Image Haze Removal Using Dark Channel Prior</em>
+</p>
+
+然后，论文提出了一个很重要的假设：***场景的表面shading（求翻译）和透射率是统计上独立的***。这个假设源于shading \\(l(x)\\)取决于场景的照度，表面的反射特性和场景的几何特性；而透射率 \\(t(x)\\)取决于场景的深度\\(d(x)\\)和雾的浓度（散射度）\\(\beta\\)，理论上而言应该是统计独立的。有了这个假设之后，我们就可以通过*独立成分分析*（Independent Component Analysis）估计出\\(l(x)\\)和\\(t(x)\\)。
+
+如前所述，这篇文章的方法是基于物理模型的，能得到较好的无雾图像和深度图。然而该方法会受到其“统计独立性”的假设的限制，比如在信噪比较低（浓雾场景）的情况下得到的统计特性会不准确。另外该方法基于颜色信息，对于灰度图或者浓雾场景导致的colorless的情况不太适用。（以上评论来自“Single Image Haze Removal Using Dark Channel Prior”）
 
 ### 2009年
 
 #### 1. Single Image Haze Removal Using Dark Channel Prior ([link](https://www.robots.ox.ac.uk/~vgg/rg/papers/hazeremoval.pdf))
 
-> 利用理论模型，将其中变量解耦合和重组，从而获得监督信号
+> 暗通道先验估计透射图
+
+这篇文章可谓是单张图像去雾算法的 seminal work。特别是该文章出自Kaiming He之手，又是当年CVPR的best paper，对于华人CV研究者来说应该是无人不知吧。我个人是真的非常喜欢读这篇论文的。算法简洁优美而不失广泛性，文章易读清晰而不失全面性，的确不愧为best paper。
+
+暗通道先验的算法十分简单，而且网上介绍这篇论文的文章太多了，所以我也不打算再多赘述了。放个dark channel的计算公式，强烈推荐感兴趣的朋友读读原文。
+
+$$J^{dark}(x)=\min_{c\in\\{r,g,b\\}}(\min_{y\in\Omega (x)} (J^c(y)))$$
 
 ### 2014年
 
@@ -83,19 +97,27 @@ $$J(x)= \frac{I(x)-A}{t(x)} + A $$
 
 #### 1. A Fast Single Image Haze Removal Algorithm Using Color Attenuation Prior (TIP15，[link](http://wineyard.in/Abstract/mtech/DIP/2015/bp/15D008.pdf))
 
-> 通过不同通道之间的跨通道预测，实现数据的无监督学习
+> 卷积网络生成透射图
 
 
 ### 2016年
 
 #### 1. DehazeNet: An End-to-End System for Single Image Haze Removal (TIP16，[link](https://arxiv.org/pdf/1601.07661.pdf))
 
-> 空间卷积降维，时间反卷积升维，从而得到更精细的动作边界（帧级别）
+> 卷积神经网络生成透射图
 
+将卷积神经网络运用到去雾问题（估计透射图）的工作。文章的 Introduction 和 Related works 写得不错，总结了之前的一些工作以及几个常用的先验方法。模型方面，文章中的卷积神经网络只有三层：1、基于 Maxout unit 的“特征提取”层；2、并行使用不同大小卷积核的“多尺度映射”层及之后Maxpooling的“局部最大值”层；3、使用了一个双边ReLU（BReLU）作为激活函数的“非线性回归”层。如下图：
+
+<p align="center" >
+    <img src="/assets/papers/dehazenet.png" align="center" height="280px" alt>
+    <em>来源：DehazeNet: An End-to-End System for Single Image Haze Removal</em>
+</p>
+
+网络结构非常简单，损失函数也只是MSE loss，然而效果看着还是很不错的（跑过代码）。值得一提的是它的训练数据的生成方式。由于一般很难得到大量的成对（有雾和无雾）图像来训练网络，文中采用合成的图像（利用大气散射模型）作为训练数据。文中从网上收集部分无雾的照片，从中任意采样16*16的图像块，然后对图像块合成为有雾的图像块。其中合成基于两点假设：1、图像内容如透射率无关（同样的图像内容可以有不同深度的情况）；2、透射率在局部区域内是恒定的（小图像块中的像素点具有相同的深度）。由于这两个假设，我们就可以任意选取一个0到1的值作为某个图像块的\\(t\\)，然后以此合成有雾的照片。为了简化学习过程，将\\(A\\)设为常数1.
 
 #### 2. Single Image Dehazing via Multi-Scale Convolutional Neural Networks (ECCV16，[link](https://drive.google.com/file/d/0B7PPbXPJRQp3TUJ0VjFaU1pIa28/view))
 
-> 动态规划定位最佳起始位置和终点3
+> 多尺度卷积神经网络生成透射图
 
 #### 3. Non-Local Image Dehazing (CVPR16，[link](https://www.eng.tau.ac.il/~berman/NonLocalDehazing/NonLocalDehazing_CVPR2016.pdf))
 
@@ -105,4 +127,13 @@ $$J(x)= \frac{I(x)-A}{t(x)} + A $$
 
 #### 1. AOD-Net: All-in-One Dehazing Network (ICCV17，[link](https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxib3lpbGljc3xneDpjMjBjM2E3ZTAxZTM0NDU))
 
-> 一个新的非线性降维方法
+> 端到端去雾网络
+
+目前最新publish的去雾算法工作，彻底将去雾问题转化为一个端到端（End-to-End）解决的问题。首先，为了实现端到端训练且避免利用额外的方法估计全局大气光照\\(A\\)，文章做了一些简单的数学变换，把\\(t(x)\\)和\\(A\\)统一到了一个变量\\(K(x)\\)当中。这样只需要用网络估计出\\(K(x)\\)就可以直接得到\\(J(x)\\)了。网络结构仍是异常简单（见下图），效果嘛......跟前两个比也没感觉有啥区别。
+
+<p align="center" >
+    <img src="/assets/papers/aodnet.png" align="center" height="280px" alt>
+    <em>来源：AOD-Net: All-in-One Dehazing Network</em>
+</p>
+
+值得一提的是，其实\\(K(x)\\))里面还包含了\\(I(x)\\)，换句话说，个人觉得这跟用网络直接从\\(J(x)\\)估计\\(I(x)\\)的难度没什么区别...另外，文章还把去雾这部分作为一种预处理应用在目标检测当中。
