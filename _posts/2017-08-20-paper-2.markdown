@@ -1,0 +1,96 @@
+---
+layout: post
+comments: true
+title: "论文摘趣 (2) -- 图像去雾算法专题"
+excerpt: "论文摘趣第二期，我们来对图像去雾算法做一个简短的综述"
+date: 2017-08-20
+mathjax: true
+---
+
+论文摘趣第二期（说好的周更呢？！），我们来对图像去雾算法做一个简短的综述。图像去雾是一个公认的比较困难的问题，甚至在很多情况下是一个欠适定（underdetermined）的问题（从下文的成像模型可以看出）。因此有不少工作是利用多张图片或者额外信息来实现去雾效果的。然而本文的内容只针对于单张图像的去雾算法（single image dehazing），即给定一张含有雾气的图像，我们希望还原其无雾的图像。
+
+## 一、有雾图像的成像模型
+----------
+
+在计算机视觉和图形学领域中，人们对有雾图像的形成原理有一个常用的物理模型——大气散射模型（atmospheric scattering model）。为了保持符号的一致，我们以下统一采用“[暗通道先验]()”文章中的表示方式。
+
+大气散射模型首先基于这样的一个现象：光线经过一个散射媒介之后，*其原方向的光线强度会受到衰减*，并且其能量会发散到其他方向。因此，在一个有雾的环境中，相机（或者人眼）接收到的某个物体（或场景）的光其实来源于两个部分：1、来自于该物体（或场景）本身，这个部分的光强受到散射媒介的影响会有衰弱；2、来自大气中其他光源散射至相机（或人眼）的光强。见下图：
+
+<div style="text-align:center;"><img src="/assets/papers/optical_model.png" align="center" height="280px"></div>
+
+由于能量是守恒的，*散射掉的部分光强度应该跟其他光源散射过来的光强是一样的*。因此，我们可以将一张有雾的图像表示为以下的一个线性模型：
+
+$$I(x) = J(x)t(x) + A(1-t(x)) $$
+
+其中\\( I(x) \\)是有雾图像，\\( J(x) \\)是物体（或场景）的原始辐射（radiance），\\(A\\)是全局大气光照，\\( t(x) \\)被称作介质透射率（medium transmission）。其中第一项\\( J(x)t(x) \\)又称作直接衰减（direct attenuation）；第二项\\( A(1-t(x)) \\)称作 airlight。由于大气的全局光照应该是无向且均匀的，我们可以把\\( A \\)近似为一个于位置无关的常量，而透射率\\( t(x) \\)则是与位置相关的，因此是一个二维的透射图。
+
+再进一步，如果我们假设大气是均质（homogenous）的话，透射率则与物体（或场景）到相机的距离成反指数关系：
+
+$$t(x)=\exp{-\beta d(x)}$$
+
+其中\\( d(x) \\)是深度图（depth map），\\( \beta \\)是大气的散射系数。
+
+从几何上看，上文的大气散射模型说明了在 RGB 颜色空间当中，向量\\( A \\)、\\( I(x) \\)和\\( J(x) \\)是共面的，而且它们的终点应该是共线的，如下图：
+
+![](/assets/papers/optical_model_geo.png)
+*来源：Single Image Haze Removal Using Dark Channel Prior*
+
+## 二、文献一览
+----------
+
+### 2008年
+
+#### 1. Visibility in Bad Weather from a Single Image (CVPR08，[link](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.329.7924&rep=rep1&type=pdf))
+
+> 通过捕捉运动的方式自动得到图像中的物体，并以此进行图像特征的无监督学习
+
+对于关注特征学习的我来说，这篇来自于Facebook和伯克利的论文是十分有趣，想法简洁而又让人信服。而且Deepak小哥在poster前的讲解也是尽心尽力，我想我以后会更多关注他们组的一些工作了。首先这篇文章有一个关键而且颇为合理的假设：我们可以通过运动来发现这个物体（或者说分辨出物体与背景的区别）。举个例子：下图中有一只猫（左上），如果它静止不动的话，一个没见过猫的人可能会根据颜色等因素将这个物体分割成不同的部分（如右上）。但若这只猫动了（如左下），我们就可以通过整个物体的运动发现这些部分应该是属于“猫”这一个统一的物体的（如右下）。
+ 
+<div style="text-align:center;"><img src="/assets/papers/Learning_by_Moving.png" align="center" height="280px"></div>
+    
+发现猫这个物体之后，我们人类就会修改自己对“猫”的认识。当下次我们再见到这样的猫的时候，我们自然就会直接识别出猫这个整体了。同时这也说明了我们对这类图像有了更好的理解，即更好的“特征表示”。受到这个思路的启发，这篇论文就是希望：***先通过捕捉运动的方式自动地得到图像中的物体，然后训练模型让它能够直接从图像输入中分割出物体来，从而学习到对这个图像更好的特征表示***。为了得到物体的运动，论文对视频数据提取光流，然后将与背景运动不同的部分视为物体。分割出物体后的掩码图（mask）会作为训练的监督信号，让模型能够做到给定单一图像作为输入，输出图中物体的掩码图（类似图像分割）。通过这样不断的自动寻找物体并训练模型，我们就可以得到一个更好的图像特征表示了。
+
+#### 2. Single Image Dehazing (TOG08，[link](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.456.2558&rep=rep1&type=pdf))
+
+> 通过解决“寻找多个片段中的乱序片段”这个辅助任务，进行视频的自监督学习
+    
+单作者
+
+
+### 2009年
+
+#### 1. Single Image Haze Removal Using Dark Channel Prior ([link](https://www.robots.ox.ac.uk/~vgg/rg/papers/hazeremoval.pdf))
+
+> 利用理论模型，将其中变量解耦合和重组，从而获得监督信号
+
+### 2014年
+
+#### 1. Investigating Haze-relevant Features in A Learning Frameworkfor Image Dehazing （CVPR14，[link](http://www.juew.org/publication/dehazing_cvpr14.pdf)）
+
+### 2015年
+
+#### 1. A Fast Single Image Haze Removal Algorithm Using Color Attenuation Prior (TIP15，[link](http://wineyard.in/Abstract/mtech/DIP/2015/bp/15D008.pdf))
+
+> 通过不同通道之间的跨通道预测，实现数据的无监督学习
+
+
+### 2016年
+
+#### 1. DehazeNet: An End-to-End System for Single Image Haze Removal (TIP16，[link](https://arxiv.org/pdf/1601.07661.pdf))
+
+> 空间卷积降维，时间反卷积升维，从而得到更精细的动作边界（帧级别）
+
+
+#### 2. Single Image Dehazing via Multi-Scale Convolutional Neural Networks (ECCV16，[link](https://drive.google.com/file/d/0B7PPbXPJRQp3TUJ0VjFaU1pIa28/view))
+
+> 动态规划定位最佳起始位置和终点3
+
+#### 3. Non-Local Image Dehazing (CVPR16，[link](https://www.eng.tau.ac.il/~berman/NonLocalDehazing/NonLocalDehazing_CVPR2016.pdf))
+
+> 从含噪数据中估计标签转移矩阵，以纠正原本受标签噪声影响的模型
+
+### 2017年
+
+#### 1. AOD-Net: All-in-One Dehazing Network (ICCV17，[link](https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxib3lpbGljc3xneDpjMjBjM2E3ZTAxZTM0NDU))
+
+> 一个新的非线性降维方法
