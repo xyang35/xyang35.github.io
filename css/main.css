@@ -24,6 +24,8 @@ a:visited { color: #205caa; }
 
 img+em { display: block; text-align:center;}
 
+img {max-width: 100%;}
+
 /* Utility */
 
 .wrap:before,
