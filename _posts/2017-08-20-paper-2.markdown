@@ -18,7 +18,7 @@ mathjax: true
 
 
 <p align="center" >
-    <img src="/assets/papers/optical_model.png" align="center" height="280px" alt>
+    <img src="/assets/papers/optical_model.png" align="center" alt>
     <em>来源：DehazeNet: An End-to-End System for Single Image Haze Removal</em>
 </p>
 
@@ -37,7 +37,7 @@ $$t(x)=\exp^{-\beta d(x)}$$
 从几何上看，上文的大气散射模型说明了在 RGB 颜色空间当中，向量 \\( A \\)、\\( I(x) \\) 和 \\( J(x) \\) 是共面的，而且它们的终点应该是共线的，透射率 \\( t(x) \\) 是 \\( \left\lVert A-I(x)\right\rVert \\) 和 \\( \left\lVert A-J(x)\right\rVert \\) 的比值。如下图：
 
 <p align="center" >
-    <img src="/assets/papers/optical_model_geo.png" align="center" height="280px" alt>
+    <img src="/assets/papers/optical_model_geo.png" align="center" alt>
     <em>来源：Single Image Haze Removal Using Dark Channel Prior</em>
 </p>
 
@@ -81,7 +81,7 @@ $$\sum_t \|\nabla I(x)\| = t\sum_t \|\nabla J(x)\| \leq \sum_t \|\nabla I(x)\|$$
 与前文不同，这篇文章提出了一个基于物理模型的图像去雾方法。首先，文中对场景辐射 \\(J(x)\\) 作了一定的简化——局部反照率恒定（locally constant albedo）。我们把未知图像 \\(J(x)\\) 分解为两项相乘的形式 \\( R(x)l(x) \\)，其中 \\(R\\) 是一个三通道的RGB向量，代表场景表面的反射系数；\\(l(x)\\) 是一个标量，表示该位置的反射光强。*局部分照率恒定* 则是假设一个局部区域内各个像素点的反射系数是一致的：\\( R(x) = R, x\in \Omega \\)。因此，同一个局部内的所有 \\(J(x)\\) 都具有相同的方向 \\(R\\)。如下图：
 
 <p align="center" >
-    <img src="/assets/papers/fattal.png" align="center" height="280px" alt>
+    <img src="/assets/papers/fattal.png" align="center"  alt>
     <em>来源：Single Image Haze Removal Using Dark Channel Prior</em>
 </p>
 
@@ -122,7 +122,7 @@ $$J^{dark}(x)=\min_{c\in \\{r,g,b \\}}(\min_{y\in\Omega (x)} (J^c(y)))$$
 本文的模型与上一篇十分相似，都是采用一个回归模型对场景深度（前文是透射率）进行估计。不同的是，本文提出了一种新的先验知识：*颜色衰减先验*。该先验基于一个发现：在无雾区域部分，其亮度（brightness）和颜色饱和度（saturation）应该是相近的；而在有雾区域部分，其亮度和颜色饱和度会相差很多。如下图：
 
 <p align="center" >
-    <img src="/assets/papers/CAP.png" align="center" height="280px" alt>
+    <img src="/assets/papers/CAP.png" align="center"  alt>
     <em>来源：A Fast Single Image Haze Removal Algorithm Using Color Attenuation Prior</em>
 </p>
 
@@ -137,7 +137,7 @@ $$J^{dark}(x)=\min_{c\in \\{r,g,b \\}}(\min_{y\in\Omega (x)} (J^c(y)))$$
 将卷积神经网络运用到去雾问题（估计透射图）的工作。文章的 Introduction 和 Related works 写得不错，总结了之前的一些工作以及几个常用的先验方法。模型方面，文章中的卷积神经网络只有三层：1、基于 Maxout unit 的“特征提取”层；2、并行使用不同大小卷积核的“多尺度映射”层及之后Maxpooling的“局部最大值”层；3、使用了一个双边ReLU（BReLU）作为激活函数的“非线性回归”层。如下图：
 
 <p align="center" >
-    <img src="/assets/papers/dehazenet.png" align="center" height="280px" alt>
+    <img src="/assets/papers/dehazenet.png" align="center" alt>
     <em>来源：DehazeNet: An End-to-End System for Single Image Haze Removal</em>
 </p>
 
@@ -150,7 +150,7 @@ $$J^{dark}(x)=\min_{c\in \\{r,g,b \\}}(\min_{y\in\Omega (x)} (J^c(y)))$$
 与前文非常相似的思路，不同的是提出了一个多尺度的卷积神经网络结构。通过先用粗糙网络生成粗粒度的透射图，再用精细网络进一步得到更细致的图像。网络结构如下：
 
 <p align="center" >
-    <img src="/assets/papers/MSCNN.png" align="center" height="280px" alt>
+    <img src="/assets/papers/MSCNN.png" align="center" alt>
     <em>来源：Single Image Dehazing via Multi-Scale Convolutional Neural Networks</em>
 </p>
 
@@ -167,7 +167,7 @@ $$J^{dark}(x)=\min_{c\in \\{r,g,b \\}}(\min_{y\in\Omega (x)} (J^c(y)))$$
 目前最新publish的去雾算法工作，彻底将去雾问题转化为一个端到端（End-to-End）解决的问题。首先，为了实现端到端训练且避免利用额外的方法估计全局大气光照 \\(A\\)，文章做了一些简单的数学变换，把 \\(t(x)\\) 和\ \(A\\) 统一到了一个变量 \\(K(x)\\) 当中。这样只需要用网络估计出 \\(K(x)\\) 就可以直接得到 \\(J(x)\\) 了。网络结构仍是异常简单（见下图），效果嘛......跟前两个比也没感觉有啥区别。
 
 <p align="center" >
-    <img src="/assets/papers/aodnet.png" align="center" height="280px" alt>
+    <img src="/assets/papers/aodnet.png" align="center" alt>
     <em>来源：AOD-Net: All-in-One Dehazing Network</em>
 </p>
 
