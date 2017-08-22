@@ -147,9 +147,16 @@ $$J^{dark}(x)=\min_{c\in \\{r,g,b \\}}(\min_{y\in\Omega (x)} (J^c(y)))$$
 
 > 多尺度卷积神经网络生成透射图
 
+与前文非常相似的思路，不同的是提出了一个多尺度的卷积神经网络结构。通过先用粗糙网络生成粗粒度的透射图，再用精细网络进一步得到更细致的图像。网络结构如下：
+
+<p align="center" >
+    <img src="/assets/papers/fattal.png" align="center" height="280px" alt>
+    <em>来源：Single Image Dehazing via Multi-Scale Convolutional Neural Networks</em>
+</p>
+
 #### 3. Non-Local Image Dehazing (CVPR16，[link](https://www.eng.tau.ac.il/~berman/NonLocalDehazing/NonLocalDehazing_CVPR2016.pdf))
 
-> 从含噪数据中估计标签转移矩阵，以纠正原本受标签噪声影响的模型
+> 
 
 ### 2017年
 
