@@ -3,7 +3,7 @@ layout: post
 comments: true
 title: "GAN入门实践--Tensorflow实现"
 excerpt: "用Tensorflow实现一个基于生成对抗模型的高斯分布生成器。"
-date: 2017-08-19
+date: 2017-08-22
 mathjax: false
 ---
 
