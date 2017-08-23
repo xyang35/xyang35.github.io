@@ -25,7 +25,7 @@ a:visited { color: #205caa; }
 img+em { display: block; text-align:center;}
 
 img {
-    max-height: 280px;
+    max-height: 280px;  /* order is important */
     max-width: 100%;
     height: auto;
 }
