@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: "GAN入门实践--Tensorflow实现"
+title: "GAN入门实践（一）--Tensorflow实现"
 excerpt: "用Tensorflow实现一个基于生成对抗模型的高斯分布生成器。"
 date: 2017-08-22
 mathjax: false
@@ -13,11 +13,10 @@ mathjax: false
 
 这个教程的实现是基于 mxnet 的，而我最近比较常用的是 tensorflow 和 pytorch，因此花了点小时间把其中的内容用这两个框架实现了一遍。一方面是加深自己对 GAN 和 tensorflow ／ pytorch 的理解，同时也给感兴趣的朋友多一些参考。由于教程已经非常通俗易懂了，本文不会再重复其中的讲解，而是记录一些实现过程中个人觉得要注意的地方。
 
-Tensorflow实现的全代码在[这里](https://github.com/xyang35/Introduction-to-GAN/blob/master/GAN-tensorflow.ipynb)，另外还有conditional GAN的实现在[这里](https://github.com/xyang35/Introduction-to-GAN/blob/master/CGAN-tensorflow.ipynb)。
-
+***Tensorflow实现的全代码在[这里](https://github.com/xyang35/Introduction-to-GAN/blob/master/GAN-tensorflow.ipynb)***，另外还有conditional GAN的实现在[这里](https://github.com/xyang35/Introduction-to-GAN/blob/master/CGAN-tensorflow.ipynb)。
 其中还参考了[DCGAN的实现](https://github.com/carpedm20/DCGAN-tensorflow)。
 
-Pytorch篇请看[这里]()
+Pytorch篇请看[这里](https://xyang35.github.io/2017/08/23/GAN-2/)。
 
 
 ----------
