@@ -99,7 +99,7 @@ $$\sum_t \|\nabla I(x)\| = t\sum_t \|\nabla J(x)\| \leq \sum_t \|\nabla I(x)\|$$
 
 暗通道先验的算法十分简单，而且网上介绍这篇论文的文章太多了，所以我也不打算再多赘述了。放个dark channel的计算公式，强烈推荐感兴趣的朋友读读原文。
 
-$$J^{dark}(x)=\min\_{c\in \\{r,g,b \\} }(\min_{y\in\Omega (x)} (J^c(y)))$$
+$$J^{dark}(x)=\min_{c\in \\{r,g,b \\} }(\min_{y\in\Omega (x)} (J^c(y)))$$
 
 ### 2014年
 
