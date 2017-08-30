@@ -20,14 +20,14 @@ Our project is about “single image haze removal”, meaning that we would like
 
 Each page contains 50 images, and you need to submit your annotation after you finish all of them. The annotation will be stored **only after** you click the “Submit” button. The “Submit” button is at the bottom of the webpage. The default selection is “haze-free”, so you only need to select the other options if you find the image should not be haze-free. After clicking the submission button, you will be redirect to the index page, then you can choose the next session.
 
-Some kind reminder:
+Some kind reminders:
 
 - Put your initial in the [***sign-up sheet***](https://docs.google.com/spreadsheets/d/15tR6jz6aC5bigkq8bbTq4U8xExHKX9SokeFBrL004hE/edit?usp=sharing) **before** working on your session
 
 - Different groups have different index pages, don't mess up
 - Click "Submit" button after finishing a page to store your annotation
 - Read the examples below first to get the annotation criteria
-- Don’t waste too much time on struggling the correct annotation, leave the ambiguous ones “not sure”.
+- Don’t waste too much time on struggling with the correct annotation, leave the ambiguous ones “not sure”.
 
 ## Annotation Criteria
 
@@ -61,31 +61,31 @@ In our dataset, we need to manually annotate each image as one of the following 
 ### Not sure
 
 <p align="center" >
-    <img src="/assets/annotation/example6.png" align="center" height="280px"alt>
+    <img src="/assets/annotation/example6.png" align="center" height="280px" alt>
     <em>Haze exists at the place very far away. Even though we know there’s haze there, we expect that it may not have much different after haze removing, so we can annotate it as <b>not sure</b>.</em>
 </p>
 
 <p align="center" >
-    <img src="/assets/annotation/example7.png" align="center" height="280px"alt>
+    <img src="/assets/annotation/example7.png" align="center" height="280px" alt>
     <em>You may see some haze at the background, or may not. In these cases, you can annotate them as <b>not sure</b>.</em>
 </p>
 
 ### Haze-free
 
 <p align="center" >
-    <img src="/assets/annotation/example8.png" align="center" height="280px"alt>
+    <img src="/assets/annotation/example8.png" align="center" height="280px" alt>
     <em>Haze-free images are <b>haze-free</b>.</em>
 </p>
 
 ### Bad image
 
 <p align="center" >
-    <img src="/assets/annotation/example9.png" align="center" height="280px"alt>
+    <img src="/assets/annotation/example9.png" align="center" height="280px" alt>
     <em>We don’t need this kind of images with extreme dark and bright. So annotate it as <b>Bad image</b>.</em>
 </p>
 
 <p align="center" >
-    <img src="/assets/annotation/example10.png" align="center" height="280px"alt>
+    <img src="/assets/annotation/example10.png" align="center" height="280px" alt>
     <em>We don’t need the images at night in our experiment, so annotate it as <b>Bad image</b>.</em>
 </p>
 
