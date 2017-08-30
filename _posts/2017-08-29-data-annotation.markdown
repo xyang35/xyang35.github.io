@@ -7,7 +7,7 @@ date: 2017-08-29
 mathjax: false
 ---
  <div style="background-color:rgba(255, 255, 0, 0.7); text-align:center; vertical-align: middle;">
-[***Sign-up sheet is here***](https://docs.google.com/spreadsheets/d/15tR6jz6aC5bigkq8bbTq4U8xExHKX9SokeFBrL004hE/edit?usp=sharing)
+<a href="https://docs.google.com/spreadsheets/d/15tR6jz6aC5bigkq8bbTq4U8xExHKX9SokeFBrL004hE/edit?usp=sharing"><strong>Sign-up sheet is here</strong></a>
 </div>
 
 ## Introduction
@@ -45,48 +45,48 @@ In our dataset, we need to manually annotate each image as one of the following 
 
 <p align="center" >
     <img src="/assets/annotation/example2.png" align="center" height="280px"alt>
-    <em>Definitely hazy image, and we can expect great improvement after haze removal. So annotate it as <b>Hazy</b>.</em>
+    <em>Definitely hazy image, and we can expect great improvement after haze removal. So annotate it as <b>Hazy</b>.</em>
 </p>
 
 <p align="center" >
     <img src="/assets/annotation/example3.png" align="center" height="280px"alt>
-    <em>The haze is not as strong as the one above, but it is still visible and makes the buildings behind blurry. You can annotate it as <b>Hazy</b> in these cases.</em>
+    <em>The haze is not as strong as the one above, but it is still visible and makes the buildings behind blurry. You can annotate it as <b>Hazy</b> in these cases.</em>
 </p>
 
 <p align="center" >
     <img src="/assets/annotation/example45.png" align="center" height="280px"alt>
-    <em>The left image is <b>hazy</b>. It is sometimes useful to justify an image according to its neighbors. For example, the neighbors of this image is on the right. We can then easily tell which ones are hazy and which ones are not.  </em>
+    <em>The left image is <b>hazy</b>. It is sometimes useful to justify an image according to its neighbors. For example, the neighbors of this image is on the right. We can then easily tell which ones are hazy and which ones are not.</em>
 </p>
 
 ### Not sure
 
 <p align="center" >
     <img src="/assets/annotation/example6.png" align="center" height="280px"alt>
-    <em>Haze exists at the place very far away. Even though we know there’s haze there, we expect that it may not have much different after haze removing, so we can annotate it as <b>not sure</b>.</em>
+    <em>Haze exists at the place very far away. Even though we know there’s haze there, we expect that it may not have much different after haze removing, so we can annotate it as <b>not sure</b>.</em>
 </p>
 
 <p align="center" >
     <img src="/assets/annotation/example7.png" align="center" height="280px"alt>
-    <em>You may see some haze at the background, or may not. In these cases, you can annotate them as <b>not sure</b>.</em>
+    <em>You may see some haze at the background, or may not. In these cases, you can annotate them as <b>not sure</b>.</em>
 </p>
 
 ### Haze-free
 
 <p align="center" >
     <img src="/assets/annotation/example8.png" align="center" height="280px"alt>
-    <em>Haze-free images are <b>haze-free</b>.</em>
+    <em>Haze-free images are <b>haze-free</b>.</em>
 </p>
 
 ### Bad image
 
 <p align="center" >
     <img src="/assets/annotation/example9.png" align="center" height="280px"alt>
-    <em>We don’t need this kind of images with extreme dark and bright. So annotate it as <b>Bad image</b>.</em>
+    <em>We don’t need this kind of images with extreme dark and bright. So annotate it as <b>Bad image</b>.</em>
 </p>
 
 <p align="center" >
     <img src="/assets/annotation/example10.png" align="center" height="280px"alt>
-    <em>We don’t need the images at night in our experiment, so annotate it as <b>Bad image</b>.</em>
+    <em>We don’t need the images at night in our experiment, so annotate it as <b>Bad image</b>.</em>
 </p>
 
 ## Closure
