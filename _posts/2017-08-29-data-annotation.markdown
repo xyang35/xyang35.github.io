@@ -44,17 +44,17 @@ In our dataset, we need to manually annotate each image as one of the following 
 ### Hazy
 
 <p align="center" >
-    <img src="/assets/annotation/example2.png" align="center" height="280px"alt>
+    <img src="/assets/annotation/example2.png" align="center" height="280px" alt>
     <em>Definitely hazy image, and we can expect great improvement after haze removal. So annotate it as <b>Hazy</b>.</em>
 </p>
 
 <p align="center" >
-    <img src="/assets/annotation/example3.png" align="center" height="280px"alt>
+    <img src="/assets/annotation/example3.png" align="center" height="280px" alt>
     <em>The haze is not as strong as the one above, but it is still visible and makes the buildings behind blurry. You can annotate it as <b>Hazy</b> in these cases.</em>
 </p>
 
 <p align="center" >
-    <img src="/assets/annotation/example45.png" align="center" height="280px"alt>
+    <img src="/assets/annotation/example45.png" align="center" height="280px" alt>
     <em>The left image is <b>hazy</b>. It is sometimes useful to justify an image according to its neighbors. For example, the neighbors of this image is on the right. We can then easily tell which ones are hazy and which ones are not.</em>
 </p>
 
