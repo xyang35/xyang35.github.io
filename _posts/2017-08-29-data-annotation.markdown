@@ -24,7 +24,7 @@ Some kind reminders:
 
 - Put your initial in the [***sign-up sheet***](https://docs.google.com/spreadsheets/d/15tR6jz6aC5bigkq8bbTq4U8xExHKX9SokeFBrL004hE/edit?usp=sharing) **before** working on your session
 
-- Different groups have different index pages, don't mess up
+- Different groups have **different index pages**, don't mess up
 - Click "Submit" button after finishing a page to store your annotation
 - Read the examples below first to get the annotation criteria
 - Don’t waste too much time on struggling with the correct annotation, leave the ambiguous ones “not sure”.
