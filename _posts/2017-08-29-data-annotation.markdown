@@ -18,7 +18,7 @@ Our project is about “single image haze removal”, meaning that we would like
 
 ***Before*** you start working on a session, please open the [***sign-up sheet***](https://docs.google.com/spreadsheets/d/15tR6jz6aC5bigkq8bbTq4U8xExHKX9SokeFBrL004hE/edit?usp=sharing) and put your intitial in the box of the group and session you want to work on. For each image, we need three different people to annotation it, so please choose only ***one of the group*** for each session. 
 
-Each page contains 50 images, and you need to submit your annotation after you finish all of them. The annotation will be stored **only after** you click the “Submit” button. The “Submit” button is at the bottom of the webpage. The default selection is “haze-free”, so you only need to select the other options if you find the image should not be haze-free. After clicking the submission button, you will be redirect to the index page, then you can choose the next session.
+Each page contains 50 images, and you need to submit your annotation after you finish all of them. The annotation will be stored **only after** you click the “Submit” button. The “Submit” button is at the bottom of the webpage. The default selection is “**not sure**”, so you only need to select the other options if you find the image should not be not sure. After clicking the submission button, you will be redirect to the index page, then you can choose the next session.
 
 Some kind reminders:
 
@@ -39,7 +39,7 @@ In our project, “haze” can be viewed as a general term including haze, fog a
 
 In our dataset, we need to manually annotate each image as one of the following four labels:
 - **Hazy**: the image should satisfy both two criteria: 1. It is hazy; 2. **It is good for haze removal task** (we can expect decent visual improvement if the haze is removed)
-- **Not sure**: may contain a little haze, but just a small part of the image (even though we remove the haze, the quality does not differ much)- **Haze-free**: no haze, clean image.- **Bad image**: the option in case you see some images that should not be included in our dataset. For example, images **at night, with low resolution or extreme environment** (too bright or too dark or anything weird).## Examples
+- **Not sure** (default): may contain a little haze, but just a small part of the image (even though we remove the haze, the quality does not differ much)- **Haze-free**: no haze, clean image.- **Bad image**: the option in case you see some images that should not be included in our dataset. For example, images **at night, with low resolution or extreme environment** (too bright or too dark or anything weird).## Examples
 
 ### Hazy
 
