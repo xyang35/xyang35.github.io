@@ -61,19 +61,19 @@ In our dataset, we need to manually annotate each image as one of the following 
 ### Not sure
 
 <p align="center" >
-    <img src="/assets/annotation/example6.png" align="center" height="280px" alt>
+    <img src="/assets/annotation/example6.jpg" align="center" height="280px" alt>
     <em>Haze exists at the place very far away. Even though we know there’s haze there, we expect that it may not have much different after haze removing, so we can annotate it as <b>not sure</b>.</em>
 </p>
 
 <p align="center" >
-    <img src="/assets/annotation/example7.png" align="center" height="280px" alt>
+    <img src="/assets/annotation/example7.jpg" align="center" height="280px" alt>
     <em>You may see some haze at the background, or may not. In these cases, you can annotate them as <b>not sure</b>.</em>
 </p>
 
 ### Haze-free
 
 <p align="center" >
-    <img src="/assets/annotation/example8.png" align="center" height="280px" alt>
+    <img src="/assets/annotation/example8.jpg" align="center" height="280px" alt>
     <em>Haze-free images are <b>haze-free</b>.</em>
 </p>
 
