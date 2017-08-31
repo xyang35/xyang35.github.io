@@ -14,7 +14,7 @@ mathjax: false
 
 First of all, thank you very much for your help! Your contribution will be gratefully acknowledged in our new paper. :)
 
-Our project is about “single image haze removal”, meaning that we would like to remove the haze from the hazy input and recover the haze-free image. **Your work is to annotate an image is hazy or not**. You can access the annotation webpage using the address provided in the [***sign-up sheet***](https://docs.google.com/spreadsheets/d/15tR6jz6aC5bigkq8bbTq4U8xExHKX9SokeFBrL004hE/edit?usp=sharing). Each session contains 10 pages, while each page contains 50 images. It takes **only 10 minutes** to finish a session! 
+Our project is about “single image haze removal”, meaning that we would like to remove the haze from the hazy input and recover the haze-free image. **Your work is to annotate an image is hazy or not**. You can access the annotation webpage using the address provided in the [***sign-up sheet***](https://docs.google.com/spreadsheets/d/15tR6jz6aC5bigkq8bbTq4U8xExHKX9SokeFBrL004hE/edit?usp=sharing). Each session contains 5 pages, while each page contains 50 images. It takes **less than 10 minutes** to finish a session! 
 
 ***Before*** you start working on a session, please open the [***sign-up sheet***](https://docs.google.com/spreadsheets/d/15tR6jz6aC5bigkq8bbTq4U8xExHKX9SokeFBrL004hE/edit?usp=sharing) and put your intitial in the box of the group and session you want to work on. For each image, we need three different people to annotation it, so please choose only ***one of the group*** for each session. 
 
@@ -22,7 +22,7 @@ Each page contains 50 images, and you need to submit your annotation after you f
 
 Some kind reminders:
 
-- Put your initial in the [***sign-up sheet***](https://docs.google.com/spreadsheets/d/15tR6jz6aC5bigkq8bbTq4U8xExHKX9SokeFBrL004hE/edit?usp=sharing) **before** working on your session
+- Put your initial in the [***sign-up sheet***](https://docs.google.com/spreadsheets/d/15tR6jz6aC5bigkq8bbTq4U8xExHKX9SokeFBrL004hE/edit?usp=sharing) **before** working on your session, otherwise it will cause **database conflict error**
 
 - Different groups have **different index pages**, don't mess up
 - Click "Submit" button after finishing a page to store your annotation
